@@ -1,1 +1,371 @@
 
+<!doctype html>
+<html lang="no">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Påskekalender</title>
+  <meta name="description" content="En enkel påskekalender for GitHub Pages" />
+  <link rel="icon" href="favicon.ico" />
+  <style>
+    :root {
+      --bg: #fff9f0;
+      --panel: rgba(255,255,255,0.88);
+      --text: #2f2a24;
+      --muted: #6f675d;
+      --accent: #f0b429;
+      --accent-2: #8fbf72;
+      --line: rgba(47,42,36,0.12);
+      --shadow: 0 10px 30px rgba(0,0,0,0.08);
+      --radius: 18px;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--text);
+      background:
+        linear-gradient(rgba(255,249,240,0.78), rgba(255,249,240,0.92)),
+        url('bakgrunn.jpg') center/cover no-repeat fixed;
+      min-height: 100vh;
+    }
+
+    .wrap {
+      width: min(1080px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 24px 0 40px;
+    }
+
+    .topbar {
+      display: flex;
+      gap: 12px;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+
+    .brand, .controls, .panel, .door, .modal-card {
+      background: var(--panel);
+      backdrop-filter: blur(6px);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .brand {
+      padding: 18px 20px;
+      flex: 1 1 320px;
+    }
+
+    .brand h1 {
+      margin: 0 0 6px;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+    }
+
+    .brand p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .controls {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      padding: 12px 14px;
+    }
+
+    .controls select, .controls button {
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      padding: 10px 12px;
+      background: white;
+      color: var(--text);
+      font: inherit;
+      cursor: pointer;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+      gap: 16px;
+      margin-top: 18px;
+    }
+
+    .door {
+      padding: 16px;
+      min-height: 170px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .door::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(140deg, rgba(240,180,41,0.16), rgba(143,191,114,0.14));
+      pointer-events: none;
+    }
+
+    .door > * { position: relative; }
+
+    .door-number {
+      font-size: 2rem;
+      font-weight: 700;
+    }
+
+    .door-date {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .door-title {
+      font-weight: 700;
+      margin-top: 10px;
+    }
+
+    .door button {
+      margin-top: 12px;
+      border: 0;
+      background: var(--accent);
+      color: #2f2a24;
+      border-radius: 12px;
+      padding: 10px 12px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .door.locked button {
+      background: #ddd4c9;
+      color: #756e66;
+      cursor: not-allowed;
+    }
+
+    .status {
+      margin-top: 20px;
+      padding: 14px 16px;
+    }
+
+    .status strong { display: block; margin-bottom: 4px; }
+    .status p { margin: 0; color: var(--muted); }
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0,0,0,0.35);
+      padding: 20px;
+    }
+
+    .modal.open { display: flex; }
+
+    .modal-card {
+      width: min(720px, 100%);
+      padding: 24px;
+      max-height: 85vh;
+      overflow: auto;
+    }
+
+    .modal-card h2 { margin-top: 0; }
+    .modal-card p { line-height: 1.6; }
+    .modal-card .close {
+      border: 0;
+      border-radius: 12px;
+      padding: 10px 12px;
+      background: var(--accent-2);
+      color: white;
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    .footer {
+      margin-top: 22px;
+      color: var(--muted);
+      font-size: 0.95rem;
+      padding: 0 2px;
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <section class="topbar">
+      <div class="brand">
+        <h1 id="pageTitle">Påskekalender</h1>
+        <p id="pageIntro">Fem små dører fra skjærtorsdag til og med påskemandag.</p>
+      </div>
+
+      <div class="controls">
+        <label for="languageSelect" id="languageLabel">Språk</label>
+        <select id="languageSelect" aria-label="Velg språk">
+          <option value="no">Norsk</option>
+          <option value="en">English</option>
+          <option value="de">Deutsch</option>
+        </select>
+        <button id="todayButton" type="button">I dag</button>
+      </div>
+    </section>
+
+    <section class="panel status" aria-live="polite">
+      <strong id="statusTitle">Status</strong>
+      <p id="statusText">Kalenderen åpner dører etter dato.</p>
+    </section>
+
+    <section class="grid" id="calendarGrid"></section>
+
+    <p class="footer" id="footerText">Bygget som en enkel GitHub Pages-versjon uten avhengigheter.</p>
+  </main>
+
+  <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-card">
+      <h2 id="modalTitle"></h2>
+      <div id="modalBody"></div>
+      <button class="close" id="closeModal" type="button">Lukk</button>
+    </div>
+  </div>
+
+  <script>
+    const calendarConfig = [
+      { id: 1, key: 'maundyThursday', date: '2026-04-02' },
+      { id: 2, key: 'goodFriday', date: '2026-04-03' },
+      { id: 3, key: 'holySaturday', date: '2026-04-04' },
+      { id: 4, key: 'easterSunday', date: '2026-04-05' },
+      { id: 5, key: 'easterMonday', date: '2026-04-06' }
+    ];
+
+    const state = {
+      lang: localStorage.getItem('easterCalendarLanguage') || 'no',
+      strings: null
+    };
+
+    const elements = {
+      languageSelect: document.getElementById('languageSelect'),
+      pageTitle: document.getElementById('pageTitle'),
+      pageIntro: document.getElementById('pageIntro'),
+      languageLabel: document.getElementById('languageLabel'),
+      todayButton: document.getElementById('todayButton'),
+      statusTitle: document.getElementById('statusTitle'),
+      statusText: document.getElementById('statusText'),
+      footerText: document.getElementById('footerText'),
+      calendarGrid: document.getElementById('calendarGrid'),
+      modal: document.getElementById('modal'),
+      modalTitle: document.getElementById('modalTitle'),
+      modalBody: document.getElementById('modalBody'),
+      closeModal: document.getElementById('closeModal')
+    };
+
+    function formatDate(dateString, lang) {
+      const date = new Date(dateString + 'T12:00:00');
+      return new Intl.DateTimeFormat(lang === 'no' ? 'nb-NO' : lang, {
+        weekday: 'long', day: 'numeric', month: 'long'
+      }).format(date);
+    }
+
+    function isUnlocked(dateString) {
+      const today = new Date();
+      const current = new Date(today.getFullYear(), today.getMonth(), today.getDate()).getTime();
+      const targetDate = new Date(dateString + 'T00:00:00');
+      const target = new Date(targetDate.getFullYear(), targetDate.getMonth(), targetDate.getDate()).getTime();
+      return current >= target;
+    }
+
+    async function loadLanguage(lang) {
+      const response = await fetch(`lang/${lang}.json`);
+      state.strings = await response.json();
+      state.lang = lang;
+      localStorage.setItem('easterCalendarLanguage', lang);
+      document.documentElement.lang = lang === 'no' ? 'nb' : lang;
+      render();
+    }
+
+    function renderStatus() {
+      const unlockedCount = calendarConfig.filter(item => isUnlocked(item.date)).length;
+      const total = calendarConfig.length;
+      elements.statusTitle.textContent = state.strings.ui.statusTitle;
+      elements.statusText.textContent = state.strings.ui.statusText
+        .replace('{open}', unlockedCount)
+        .replace('{total}', total);
+    }
+
+    function renderDoors() {
+      elements.calendarGrid.innerHTML = '';
+
+      calendarConfig.forEach(item => {
+        const content = state.strings.doors[item.key];
+        const unlocked = isUnlocked(item.date);
+
+        const card = document.createElement('article');
+        card.className = `door ${unlocked ? 'openable' : 'locked'}`;
+
+        card.innerHTML = `
+          <div>
+            <div class="door-number">${item.id}</div>
+            <div class="door-date">${formatDate(item.date, state.lang)}</div>
+            <div class="door-title">${content.title}</div>
+          </div>
+          <button type="button" ${unlocked ? '' : 'disabled'}>
+            ${unlocked ? state.strings.ui.openDoor : state.strings.ui.lockedDoor}
+          </button>
+        `;
+
+        const button = card.querySelector('button');
+        button.addEventListener('click', () => {
+          if (!unlocked) return;
+          elements.modalTitle.textContent = content.title;
+          elements.modalBody.innerHTML = `
+            <p><strong>${formatDate(item.date, state.lang)}</strong></p>
+            <p>${content.body}</p>
+          `;
+          elements.modal.classList.add('open');
+        });
+
+        elements.calendarGrid.appendChild(card);
+      });
+    }
+
+    function renderText() {
+      elements.pageTitle.textContent = state.strings.ui.pageTitle;
+      elements.pageIntro.textContent = state.strings.ui.pageIntro;
+      elements.languageLabel.textContent = state.strings.ui.languageLabel;
+      elements.todayButton.textContent = state.strings.ui.todayButton;
+      elements.footerText.textContent = state.strings.ui.footerText;
+      elements.closeModal.textContent = state.strings.ui.closeModal;
+      document.title = state.strings.ui.pageTitle;
+      elements.languageSelect.value = state.lang;
+    }
+
+    function render() {
+      renderText();
+      renderStatus();
+      renderDoors();
+    }
+
+    elements.languageSelect.addEventListener('change', event => {
+      loadLanguage(event.target.value);
+    });
+
+    elements.todayButton.addEventListener('click', () => {
+      const today = new Date();
+      alert(today.toLocaleDateString(document.documentElement.lang || 'nb-NO'));
+    });
+
+    elements.closeModal.addEventListener('click', () => {
+      elements.modal.classList.remove('open');
+    });
+
+    elements.modal.addEventListener('click', event => {
+      if (event.target === elements.modal) {
+        elements.modal.classList.remove('open');
+      }
+    });
+
+    loadLanguage(state.lang).catch(() => loadLanguage('no'));
+  </script>
+</body>
+</html>
