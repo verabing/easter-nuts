@@ -8,150 +8,428 @@
   <link rel="icon" href="favicon.ico" />
   <style>
     :root {
-      --bg: #fff9f0;
-      --panel: rgba(255,255,255,0.88);
-      --text: #2f2a24;
-      --muted: #6f675d;
-      --accent: #f0b429;
-      --accent-2: #8fbf72;
-      --line: rgba(47,42,36,0.12);
-      --shadow: 0 10px 30px rgba(0,0,0,0.08);
-      --radius: 18px;
+      --bg: #f7f1e7;
+      --panel: rgba(255, 251, 245, 0.86);
+      --text: #372d27;
+      --muted: #75685d;
+      --line: rgba(74, 57, 43, 0.12);
+      --shadow: 0 10px 28px rgba(90, 67, 44, 0.10);
+      --radius: 22px;
+      --basket: #b98a58;
+      --basket-dark: #9b6d43;
+      --card: rgba(255,255,255,0.72);
+      --egg-1-a: #f2b84b;
+      --egg-1-b: #cb6b48;
+      --egg-2-a: #6ea2d8;
+      --egg-2-b: #f7f1d1;
+      --egg-3-a: #8cb56d;
+      --egg-3-b: #f1d6a0;
+      --egg-4-a: #d38caa;
+      --egg-4-b: #fff0c8;
+      --egg-5-a: #8f80c6;
+      --egg-5-b: #f6d89f;
     }
 
     * { box-sizing: border-box; }
+
     body {
       margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
-      color: var(--text);
-      background:
-        linear-gradient(rgba(255,249,240,0.78), rgba(255,249,240,0.92)),
-        url('bakgrunn.jpg') center/cover no-repeat fixed;
       min-height: 100vh;
+      color: var(--text);
+      font-family: Georgia, "Times New Roman", serif;
+      background:
+        radial-gradient(circle at 15% 22%, rgba(251, 226, 138, 0.24), transparent 12%),
+        radial-gradient(circle at 82% 28%, rgba(168, 191, 216, 0.22), transparent 13%),
+        radial-gradient(circle at 70% 68%, rgba(227, 175, 151, 0.20), transparent 12%),
+        linear-gradient(180deg, rgba(255,255,255,0.28), rgba(255,255,255,0.5)),
+        url('bakgrunn.jpg') center/cover no-repeat fixed,
+        var(--bg);
     }
 
     .wrap {
-      width: min(1080px, calc(100% - 32px));
+      width: min(1180px, calc(100% - 32px));
       margin: 0 auto;
-      padding: 24px 0 40px;
+      padding: 28px 0 56px;
     }
 
     .topbar {
       display: flex;
-      gap: 12px;
+      gap: 14px;
+      align-items: stretch;
       justify-content: space-between;
-      align-items: center;
       flex-wrap: wrap;
-      margin-bottom: 20px;
+      margin-bottom: 18px;
     }
 
-    .brand, .controls, .panel, .door, .modal-card {
+    .brand,
+    .controls,
+    .status,
+    .basket-panel,
+    .gallery-panel,
+    .modal-card {
       background: var(--panel);
-      backdrop-filter: blur(6px);
       border: 1px solid var(--line);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
+      backdrop-filter: blur(5px);
     }
 
     .brand {
-      padding: 18px 20px;
-      flex: 1 1 320px;
+      flex: 1 1 480px;
+      padding: 24px 26px;
     }
 
     .brand h1 {
-      margin: 0 0 6px;
-      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      margin: 0 0 8px;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      line-height: 1;
     }
 
-    .brand p {
+    .brand p,
+    .status p,
+    .intro-note,
+    .gallery-empty,
+    .footer {
       margin: 0;
       color: var(--muted);
-      line-height: 1.5;
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.55;
     }
 
     .controls {
       display: flex;
-      gap: 10px;
+      gap: 12px;
       align-items: center;
-      padding: 12px 14px;
+      padding: 14px 16px;
+      font-family: Arial, Helvetica, sans-serif;
     }
 
-    .controls select, .controls button {
-      border-radius: 12px;
+    .controls label { font-weight: 700; }
+
+    .controls select,
+    .controls button {
       border: 1px solid var(--line);
-      padding: 10px 12px;
-      background: white;
+      border-radius: 14px;
+      background: rgba(255,255,255,0.8);
       color: var(--text);
-      font: inherit;
-      cursor: pointer;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
-      gap: 16px;
-      margin-top: 18px;
-    }
-
-    .door {
-      padding: 16px;
-      min-height: 170px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .door::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(140deg, rgba(240,180,41,0.16), rgba(143,191,114,0.14));
-      pointer-events: none;
-    }
-
-    .door > * { position: relative; }
-
-    .door-number {
-      font-size: 2rem;
-      font-weight: 700;
-    }
-
-    .door-date {
-      color: var(--muted);
-      font-size: 0.95rem;
-    }
-
-    .door-title {
-      font-weight: 700;
-      margin-top: 10px;
-    }
-
-    .door button {
-      margin-top: 12px;
-      border: 0;
-      background: var(--accent);
-      color: #2f2a24;
-      border-radius: 12px;
       padding: 10px 12px;
-      font-weight: 700;
-      cursor: pointer;
-    }
-
-    .door.locked button {
-      background: #ddd4c9;
-      color: #756e66;
-      cursor: not-allowed;
+      font: inherit;
     }
 
     .status {
-      margin-top: 20px;
-      padding: 14px 16px;
+      padding: 15px 18px;
+      margin-bottom: 18px;
     }
 
-    .status strong { display: block; margin-bottom: 4px; }
-    .status p { margin: 0; color: var(--muted); }
+    .status strong,
+    .section-title {
+      display: block;
+      margin-bottom: 5px;
+      font-size: 1.2rem;
+    }
+
+    .scene {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 18px;
+      align-items: start;
+    }
+
+    .basket-panel,
+    .gallery-panel {
+      padding: 20px;
+      min-height: 100%;
+    }
+
+    .intro-note {
+      margin-bottom: 16px;
+    }
+
+    .basket-area {
+      position: relative;
+      min-height: 390px;
+      padding: 18px 12px 0;
+    }
+
+    .basket {
+      position: absolute;
+      left: 50%;
+      bottom: 0;
+      transform: translateX(-50%);
+      width: min(640px, 96%);
+      height: 220px;
+      border-radius: 40% 40% 22% 22% / 45% 45% 18% 18%;
+      background:
+        repeating-linear-gradient(
+          90deg,
+          rgba(255,255,255,0.18) 0 14px,
+          rgba(0,0,0,0.02) 14px 30px,
+          rgba(255,255,255,0.12) 30px 42px
+        ),
+        linear-gradient(180deg, #d8ab78 0%, var(--basket) 50%, var(--basket-dark) 100%);
+      box-shadow: inset 0 12px 18px rgba(255,255,255,0.18), inset 0 -14px 18px rgba(73,43,20,0.18), 0 16px 26px rgba(110, 80, 48, 0.18);
+    }
+
+    .basket::before {
+      content: '';
+      position: absolute;
+      inset: 22px 26px auto;
+      height: 28px;
+      border-radius: 999px;
+      background: rgba(108, 66, 31, 0.18);
+    }
+
+    .basket::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: -52px;
+      transform: translateX(-50%);
+      width: 380px;
+      height: 150px;
+      border: 16px solid rgba(170, 124, 76, 0.9);
+      border-bottom: 0;
+      border-radius: 220px 220px 0 0;
+      opacity: 0.6;
+      pointer-events: none;
+    }
+
+    .straw {
+      position: absolute;
+      left: 50%;
+      bottom: 112px;
+      transform: translateX(-50%);
+      width: min(560px, 88%);
+      height: 58px;
+      background:
+        repeating-linear-gradient(120deg, transparent 0 15px, rgba(207, 180, 105, 0.85) 15px 18px, transparent 18px 32px),
+        repeating-linear-gradient(60deg, transparent 0 14px, rgba(228, 203, 129, 0.75) 14px 17px, transparent 17px 30px);
+      opacity: 0.9;
+      filter: blur(0.15px);
+    }
+
+    .egg-row {
+      position: absolute;
+      inset: 10px 0 78px;
+    }
+
+    .egg {
+      position: absolute;
+      width: 110px;
+      height: 144px;
+      border: 0;
+      padding: 0;
+      cursor: pointer;
+      background: transparent;
+      transition: transform 0.18s ease, filter 0.18s ease;
+    }
+
+    .egg:hover:not(.locked) {
+      transform: translateY(-4px) rotate(var(--tilt));
+      filter: saturate(1.04);
+    }
+
+    .egg.locked { cursor: not-allowed; }
+
+    .egg-shell,
+    .egg-shell-top,
+    .egg-shell-bottom {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      border-radius: 50% 50% 47% 47% / 58% 58% 42% 42%;
+      box-shadow: inset 0 8px 12px rgba(255,255,255,0.25), inset 0 -8px 10px rgba(73,43,20,0.10), 0 8px 16px rgba(82, 57, 38, 0.18);
+      border: 2px solid rgba(89, 62, 42, 0.08);
+    }
+
+    .egg-shell {
+      top: 0;
+      height: 132px;
+      opacity: 0.98;
+    }
+
+    .egg-shell::before,
+    .egg-shell::after,
+    .egg-shell-top::before,
+    .egg-shell-bottom::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      pointer-events: none;
+    }
+
+    .egg-1 .egg-shell,
+    .egg-1 .egg-shell-top,
+    .egg-1 .egg-shell-bottom {
+      background:
+        radial-gradient(circle at 50% 22%, rgba(255,255,255,0.22), transparent 24%),
+        repeating-linear-gradient(135deg, transparent 0 10px, rgba(255,255,255,0.38) 10px 16px, transparent 16px 24px),
+        linear-gradient(180deg, var(--egg-1-a), var(--egg-1-b));
+    }
+
+    .egg-2 .egg-shell,
+    .egg-2 .egg-shell-top,
+    .egg-2 .egg-shell-bottom {
+      background:
+        radial-gradient(circle, rgba(255,255,255,0.46) 0 8px, transparent 9px) 12px 16px / 28px 28px,
+        linear-gradient(180deg, var(--egg-2-a), #86b4e3 46%, var(--egg-2-b));
+    }
+
+    .egg-3 .egg-shell,
+    .egg-3 .egg-shell-top,
+    .egg-3 .egg-shell-bottom {
+      background:
+        linear-gradient(90deg, transparent 0 8%, rgba(255,255,255,0.42) 8% 12%, transparent 12% 22%, rgba(255,255,255,0.28) 22% 25%, transparent 25% 100%),
+        linear-gradient(180deg, var(--egg-3-a), var(--egg-3-b));
+    }
+
+    .egg-4 .egg-shell,
+    .egg-4 .egg-shell-top,
+    .egg-4 .egg-shell-bottom {
+      background:
+        repeating-radial-gradient(circle at 50% 32%, rgba(255,255,255,0.42) 0 5px, transparent 5px 18px),
+        linear-gradient(180deg, var(--egg-4-a), var(--egg-4-b));
+    }
+
+    .egg-5 .egg-shell,
+    .egg-5 .egg-shell-top,
+    .egg-5 .egg-shell-bottom {
+      background:
+        repeating-linear-gradient(-32deg, transparent 0 14px, rgba(255,255,255,0.34) 14px 20px, transparent 20px 32px),
+        linear-gradient(180deg, var(--egg-5-a), var(--egg-5-b));
+    }
+
+    .egg-number {
+      position: absolute;
+      inset: 46px 0 auto;
+      text-align: center;
+      font-size: 2rem;
+      font-weight: 700;
+      color: rgba(55,45,39,0.82);
+      text-shadow: 0 1px 0 rgba(255,255,255,0.35);
+      z-index: 2;
+    }
+
+    .egg.locked .egg-shell { filter: saturate(0.75) brightness(0.97); }
+    .egg.locked .egg-number { opacity: 0.88; }
+
+    .egg-status {
+      position: absolute;
+      left: 50%;
+      bottom: 0;
+      transform: translateX(-50%);
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 0.82rem;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    .egg.opened .egg-shell { display: none; }
+
+    .egg-shell-top,
+    .egg-shell-bottom {
+      display: none;
+      height: 70px;
+      overflow: hidden;
+    }
+
+    .egg.opened .egg-shell-top,
+    .egg.opened .egg-shell-bottom {
+      display: block;
+    }
+
+    .egg.opened .egg-shell-top {
+      top: 6px;
+      clip-path: polygon(0 0, 100% 0, 100% 56%, 88% 68%, 76% 54%, 62% 68%, 48% 54%, 34% 70%, 20% 56%, 8% 66%, 0 54%);
+      transform: translateX(-50%) rotate(calc(var(--tilt) * 0.35)) translateY(-4px);
+    }
+
+    .egg.opened .egg-shell-bottom {
+      top: 62px;
+      clip-path: polygon(0 22%, 10% 34%, 22% 20%, 36% 36%, 50% 22%, 64% 38%, 78% 20%, 90% 32%, 100% 20%, 100% 100%, 0 100%);
+      transform: translateX(-50%) rotate(calc(var(--tilt) * -0.2)) translateY(10px);
+    }
+
+    .egg.opened .egg-number {
+      inset: 38px 0 auto;
+      font-size: 1.45rem;
+    }
+
+    .egg.opened .egg-status {
+      color: #8a5d39;
+      font-weight: 700;
+    }
+
+    .egg[data-pos="1"] { left: 8%; bottom: 86px; --tilt: -7deg; }
+    .egg[data-pos="2"] { left: 25%; bottom: 120px; --tilt: -3deg; }
+    .egg[data-pos="3"] { left: 43%; bottom: 138px; --tilt: 1deg; }
+    .egg[data-pos="4"] { left: 61%; bottom: 120px; --tilt: 4deg; }
+    .egg[data-pos="5"] { left: 79%; bottom: 88px; --tilt: 8deg; }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 16px;
+      margin-top: 8px;
+    }
+
+    .gallery-empty {
+      padding: 18px 0 6px;
+    }
+
+    .art-card {
+      background: var(--card);
+      border: 1px solid rgba(89, 62, 42, 0.10);
+      border-radius: 18px;
+      padding: 12px;
+      box-shadow: 0 10px 18px rgba(90, 67, 44, 0.08);
+      cursor: pointer;
+      transition: transform 0.16s ease, box-shadow 0.16s ease;
+    }
+
+    .art-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 24px rgba(90, 67, 44, 0.12);
+    }
+
+    .art-thumb {
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      object-fit: cover;
+      display: block;
+      border-radius: 14px;
+      background: linear-gradient(135deg, rgba(245,225,190,0.7), rgba(236,238,220,0.6));
+    }
+
+    .art-fallback {
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      font-size: 2rem;
+      background: linear-gradient(135deg, rgba(245,225,190,0.7), rgba(236,238,220,0.6));
+      color: rgba(55,45,39,0.62);
+    }
+
+    .art-meta {
+      padding: 10px 2px 2px;
+    }
+
+    .art-meta strong {
+      display: block;
+      font-size: 1.05rem;
+      margin-bottom: 4px;
+    }
+
+    .art-meta span {
+      display: block;
+      color: var(--muted);
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 0.92rem;
+    }
 
     .modal {
       position: fixed;
@@ -159,36 +437,151 @@
       display: none;
       align-items: center;
       justify-content: center;
-      background: rgba(0,0,0,0.35);
+      background: rgba(31, 24, 18, 0.48);
       padding: 20px;
+      z-index: 30;
     }
 
     .modal.open { display: flex; }
 
     .modal-card {
-      width: min(720px, 100%);
-      padding: 24px;
-      max-height: 85vh;
+      width: min(780px, 100%);
+      max-height: 88vh;
       overflow: auto;
+      padding: 20px;
     }
 
-    .modal-card h2 { margin-top: 0; }
-    .modal-card p { line-height: 1.6; }
-    .modal-card .close {
-      border: 0;
-      border-radius: 12px;
+    .modal-image,
+    .modal-fallback {
+      width: 100%;
+      border-radius: 16px;
+      margin: 8px 0 16px;
+      background: linear-gradient(135deg, rgba(245,225,190,0.7), rgba(236,238,220,0.6));
+    }
+
+    .modal-image {
+      max-height: 64vh;
+      object-fit: contain;
+      display: block;
+    }
+
+    .modal-fallback {
+      aspect-ratio: 4 / 5;
+      display: grid;
+      place-items: center;
+      font-size: 3rem;
+      color: rgba(55,45,39,0.58);
+    }
+
+    .modal-card h2 {
+      margin: 0;
+      font-size: 1.8rem;
+    }
+
+    .modal-date,
+    .modal-card p {
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.6;
+    }
+
+    .modal-date {
+      color: var(--muted);
+      margin: 8px 0 0;
+    }
+
+    .close {
+      border: 1px solid var(--line);
+      border-radius: 14px;
       padding: 10px 12px;
-      background: var(--accent-2);
-      color: white;
+      background: rgba(255,255,255,0.82);
+      color: var(--text);
+      font: inherit;
       cursor: pointer;
-      font-weight: 700;
     }
 
     .footer {
-      margin-top: 22px;
-      color: var(--muted);
-      font-size: 0.95rem;
+      margin-top: 18px;
       padding: 0 2px;
+    }
+
+    @media (max-width: 940px) {
+      .scene {
+        grid-template-columns: 1fr;
+      }
+
+      .basket-area {
+        min-height: 360px;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .wrap {
+        width: min(100% - 20px, 1180px);
+        padding-top: 18px;
+      }
+
+      .brand,
+      .controls,
+      .status,
+      .basket-panel,
+      .gallery-panel {
+        padding-left: 16px;
+        padding-right: 16px;
+      }
+
+      .basket-area {
+        min-height: 320px;
+        padding-top: 6px;
+      }
+
+      .egg {
+        width: 82px;
+        height: 118px;
+      }
+
+      .egg-shell,
+      .egg-shell-top,
+      .egg-shell-bottom {
+        width: 76px;
+      }
+
+      .egg-shell { height: 104px; }
+      .egg-shell-top { height: 56px; }
+      .egg-shell-bottom { height: 58px; top: 50px; }
+
+      .egg-number {
+        inset: 34px 0 auto;
+        font-size: 1.5rem;
+      }
+
+      .egg.opened .egg-number {
+        inset: 28px 0 auto;
+        font-size: 1.1rem;
+      }
+
+      .egg[data-pos="1"] { left: 4%; bottom: 74px; }
+      .egg[data-pos="2"] { left: 22%; bottom: 104px; }
+      .egg[data-pos="3"] { left: 41%; bottom: 118px; }
+      .egg[data-pos="4"] { left: 60%; bottom: 104px; }
+      .egg[data-pos="5"] { left: 79%; bottom: 76px; }
+
+      .basket {
+        height: 180px;
+      }
+
+      .basket::after {
+        width: 250px;
+        height: 110px;
+        top: -34px;
+      }
+
+      .straw {
+        bottom: 92px;
+      }
+
+      .gallery-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
     }
   </style>
 </head>
@@ -197,7 +590,7 @@
     <section class="topbar">
       <div class="brand">
         <h1 id="pageTitle">Påskekalender</h1>
-        <p id="pageIntro">Fem små dører fra skjærtorsdag til og med påskemandag.</p>
+        <p id="pageIntro">Fem små egg fra skjærtorsdag til og med påskemandag.</p>
       </div>
 
       <div class="controls">
@@ -211,12 +604,29 @@
       </div>
     </section>
 
-    <section class="panel status" aria-live="polite">
+    <section class="status" aria-live="polite">
       <strong id="statusTitle">Status</strong>
-      <p id="statusText">Kalenderen åpner dører etter dato.</p>
+      <p id="statusText">Kalenderen åpner eggene etter dato.</p>
     </section>
 
-    <section class="grid" id="calendarGrid"></section>
+    <section class="scene">
+      <div class="basket-panel">
+        <strong class="section-title" id="basketTitle">Egg i kurv</strong>
+        <p class="intro-note" id="basketIntro">Hvert egg åpnes på riktig dato. Åpnede egg blir stående som sprukne skall i kurven.</p>
+        <div class="basket-area">
+          <div class="egg-row" id="eggRow"></div>
+          <div class="straw" aria-hidden="true"></div>
+          <div class="basket" aria-hidden="true"></div>
+        </div>
+      </div>
+
+      <div class="gallery-panel">
+        <strong class="section-title" id="galleryTitle">Åpnede bilder</strong>
+        <p class="intro-note" id="galleryIntro">Hver dag legges dagens bilde til i galleriet.</p>
+        <div id="galleryEmpty" class="gallery-empty">Ingen egg er klekket enda.</div>
+        <div class="gallery-grid" id="galleryGrid"></div>
+      </div>
+    </section>
 
     <p class="footer" id="footerText">Bygget som en enkel GitHub Pages-versjon uten avhengigheter.</p>
   </main>
@@ -224,6 +634,8 @@
   <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
     <div class="modal-card">
       <h2 id="modalTitle"></h2>
+      <p class="modal-date" id="modalDate"></p>
+      <div id="modalMedia"></div>
       <div id="modalBody"></div>
       <button class="close" id="closeModal" type="button">Lukk</button>
     </div>
@@ -231,12 +643,14 @@
 
   <script>
     const calendarConfig = [
-      { id: 1, key: 'maundyThursday', date: '2026-04-02' },
-      { id: 2, key: 'goodFriday', date: '2026-04-03' },
-      { id: 3, key: 'holySaturday', date: '2026-04-04' },
-      { id: 4, key: 'easterSunday', date: '2026-04-05' },
-      { id: 5, key: 'easterMonday', date: '2026-04-06' }
+      { id: 1, key: 'maundyThursday', date: '2026-04-02', image: 'bilder/egg-1.svg', emoji: '🥚' },
+      { id: 2, key: 'goodFriday', date: '2026-04-03', image: 'bilder/egg-2.svg', emoji: '🌿' },
+      { id: 3, key: 'holySaturday', date: '2026-04-04', image: 'bilder/egg-3.svg', emoji: '🐣' },
+      { id: 4, key: 'easterSunday', date: '2026-04-05', image: 'bilder/egg-4.svg', emoji: '🌼' },
+      { id: 5, key: 'easterMonday', date: '2026-04-06', image: 'bilder/egg-5.svg', emoji: '🎨' }
     ];
+
+    const storagePrefix = 'easterCalendarOpened_';
 
     const state = {
       lang: localStorage.getItem('easterCalendarLanguage') || 'no',
@@ -251,10 +665,18 @@
       todayButton: document.getElementById('todayButton'),
       statusTitle: document.getElementById('statusTitle'),
       statusText: document.getElementById('statusText'),
+      basketTitle: document.getElementById('basketTitle'),
+      basketIntro: document.getElementById('basketIntro'),
+      galleryTitle: document.getElementById('galleryTitle'),
+      galleryIntro: document.getElementById('galleryIntro'),
+      galleryEmpty: document.getElementById('galleryEmpty'),
       footerText: document.getElementById('footerText'),
-      calendarGrid: document.getElementById('calendarGrid'),
+      eggRow: document.getElementById('eggRow'),
+      galleryGrid: document.getElementById('galleryGrid'),
       modal: document.getElementById('modal'),
       modalTitle: document.getElementById('modalTitle'),
+      modalDate: document.getElementById('modalDate'),
+      modalMedia: document.getElementById('modalMedia'),
       modalBody: document.getElementById('modalBody'),
       closeModal: document.getElementById('closeModal')
     };
@@ -274,6 +696,18 @@
       return current >= target;
     }
 
+    function isOpened(id) {
+      return localStorage.getItem(storagePrefix + id) === '1';
+    }
+
+    function markOpened(id) {
+      localStorage.setItem(storagePrefix + id, '1');
+    }
+
+    function getUi(key, fallback = '') {
+      return state.strings?.ui?.[key] || fallback;
+    }
+
     async function loadLanguage(lang) {
       const response = await fetch(`lang/${lang}.json`);
       state.strings = await response.json();
@@ -283,66 +717,123 @@
       render();
     }
 
+    function openDoor(item) {
+      if (!isUnlocked(item.date)) return;
+      markOpened(item.id);
+      render();
+      showModal(item);
+    }
+
+    function showModal(item) {
+      const content = state.strings.doors[item.key];
+      elements.modalTitle.textContent = content.title;
+      elements.modalDate.textContent = formatDate(item.date, state.lang);
+      elements.modalBody.innerHTML = `<p>${content.body}</p>`;
+      elements.modalMedia.innerHTML = `
+        <img class="modal-image" src="${item.image}" alt="${content.title}">
+      `;
+
+      const modalImage = elements.modalMedia.querySelector('img');
+      modalImage.onerror = () => {
+        elements.modalMedia.innerHTML = `<div class="modal-fallback">${item.emoji}</div>`;
+      };
+
+      elements.modal.classList.add('open');
+    }
+
     function renderStatus() {
-      const unlockedCount = calendarConfig.filter(item => isUnlocked(item.date)).length;
+      const openedCount = calendarConfig.filter(item => isOpened(item.id)).length;
       const total = calendarConfig.length;
-      elements.statusTitle.textContent = state.strings.ui.statusTitle;
-      elements.statusText.textContent = state.strings.ui.statusText
-        .replace('{open}', unlockedCount)
+      elements.statusTitle.textContent = getUi('statusTitle', 'Status');
+      elements.statusText.textContent = getUi('statusText', '{open} av {total} egg er åpnet.')
+        .replace('{open}', openedCount)
         .replace('{total}', total);
     }
 
-    function renderDoors() {
-      elements.calendarGrid.innerHTML = '';
+    function renderEggs() {
+      elements.eggRow.innerHTML = '';
 
-      calendarConfig.forEach(item => {
-        const content = state.strings.doors[item.key];
+      calendarConfig.forEach((item, index) => {
         const unlocked = isUnlocked(item.date);
+        const opened = isOpened(item.id);
+        const egg = document.createElement('button');
+        egg.type = 'button';
+        egg.className = `egg egg-${item.id} ${opened ? 'opened' : ''} ${unlocked ? 'ready' : 'locked'}`;
+        egg.dataset.pos = String(index + 1);
+        egg.setAttribute('aria-label', `${state.strings.doors[item.key].title} – ${opened ? getUi('eggOpenedShort', 'åpnet') : unlocked ? getUi('openDoor', 'Åpne') : getUi('lockedDoor', 'Låst')}`);
 
-        const card = document.createElement('article');
-        card.className = `door ${unlocked ? 'openable' : 'locked'}`;
-
-        card.innerHTML = `
-          <div>
-            <div class="door-number">${item.id}</div>
-            <div class="door-date">${formatDate(item.date, state.lang)}</div>
-            <div class="door-title">${content.title}</div>
-          </div>
-          <button type="button" ${unlocked ? '' : 'disabled'}>
-            ${unlocked ? state.strings.ui.openDoor : state.strings.ui.lockedDoor}
-          </button>
+        egg.innerHTML = `
+          <span class="egg-shell" aria-hidden="true"></span>
+          <span class="egg-shell-top" aria-hidden="true"></span>
+          <span class="egg-shell-bottom" aria-hidden="true"></span>
+          <span class="egg-number">${item.id}</span>
+          <span class="egg-status">${opened ? getUi('eggOpenedShort', 'Åpnet') : unlocked ? getUi('openDoor', 'Åpne') : getUi('lockedDoor', 'Låst')}</span>
         `;
 
-        const button = card.querySelector('button');
-        button.addEventListener('click', () => {
+        egg.addEventListener('click', () => {
           if (!unlocked) return;
-          elements.modalTitle.textContent = content.title;
-          elements.modalBody.innerHTML = `
-            <p><strong>${formatDate(item.date, state.lang)}</strong></p>
-            <p>${content.body}</p>
-          `;
-          elements.modal.classList.add('open');
+          openDoor(item);
         });
 
-        elements.calendarGrid.appendChild(card);
+        elements.eggRow.appendChild(egg);
+      });
+    }
+
+    function createArtCard(item, content) {
+      const article = document.createElement('article');
+      article.className = 'art-card';
+      article.innerHTML = `
+        <img class="art-thumb" src="${item.image}" alt="${content.title}">
+        <div class="art-meta">
+          <strong>${content.title}</strong>
+          <span>${formatDate(item.date, state.lang)}</span>
+        </div>
+      `;
+
+      const image = article.querySelector('img');
+      image.onerror = () => {
+        image.replaceWith(Object.assign(document.createElement('div'), {
+          className: 'art-fallback',
+          textContent: item.emoji
+        }));
+      };
+
+      article.addEventListener('click', () => showModal(item));
+      return article;
+    }
+
+    function renderGallery() {
+      elements.galleryGrid.innerHTML = '';
+      const openedItems = calendarConfig.filter(item => isOpened(item.id));
+      elements.galleryEmpty.style.display = openedItems.length ? 'none' : 'block';
+      elements.galleryEmpty.textContent = getUi('galleryEmpty', 'Ingen egg er klekket enda.');
+
+      openedItems.forEach(item => {
+        const content = state.strings.doors[item.key];
+        elements.galleryGrid.appendChild(createArtCard(item, content));
       });
     }
 
     function renderText() {
-      elements.pageTitle.textContent = state.strings.ui.pageTitle;
-      elements.pageIntro.textContent = state.strings.ui.pageIntro;
-      elements.languageLabel.textContent = state.strings.ui.languageLabel;
-      elements.todayButton.textContent = state.strings.ui.todayButton;
-      elements.footerText.textContent = state.strings.ui.footerText;
-      elements.closeModal.textContent = state.strings.ui.closeModal;
-      document.title = state.strings.ui.pageTitle;
+      elements.pageTitle.textContent = getUi('pageTitle', 'Påskekalender');
+      elements.pageIntro.textContent = getUi('pageIntro', 'Fem små egg fra skjærtorsdag til og med påskemandag.');
+      elements.languageLabel.textContent = getUi('languageLabel', 'Språk');
+      elements.todayButton.textContent = getUi('todayButton', 'I dag');
+      elements.basketTitle.textContent = getUi('basketTitle', 'Egg i kurv');
+      elements.basketIntro.textContent = getUi('basketIntro', 'Hvert egg åpnes på riktig dato. Åpnede egg blir stående som sprukne skall i kurven.');
+      elements.galleryTitle.textContent = getUi('galleryTitle', 'Åpnede bilder');
+      elements.galleryIntro.textContent = getUi('galleryIntro', 'Hver dag legges dagens bilde til i galleriet.');
+      elements.footerText.textContent = getUi('footerText', 'Bygget som en enkel GitHub Pages-versjon uten avhengigheter.');
+      elements.closeModal.textContent = getUi('closeModal', 'Lukk');
+      document.title = getUi('pageTitle', 'Påskekalender');
       elements.languageSelect.value = state.lang;
     }
 
     function render() {
       renderText();
       renderStatus();
-      renderDoors();
+      renderEggs();
+      renderGallery();
     }
 
     elements.languageSelect.addEventListener('change', event => {

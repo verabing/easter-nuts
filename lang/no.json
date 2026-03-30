@@ -1,36 +1,42 @@
 {
   "ui": {
     "pageTitle": "Påskekalender",
-    "pageIntro": "Fem små dører fra skjærtorsdag til og med påskemandag.",
+    "pageIntro": "Fem små egg fra skjærtorsdag til og med påskemandag.",
     "languageLabel": "Språk",
     "todayButton": "I dag",
     "statusTitle": "Status",
-    "statusText": "{open} av {total} dører er åpne akkurat nå.",
+    "statusText": "{open} av {total} egg er åpnet.",
     "openDoor": "Åpne",
     "lockedDoor": "Låst",
     "closeModal": "Lukk",
-    "footerText": "Bygget som en enkel GitHub Pages-versjon uten avhengigheter."
+    "footerText": "Bygget som en enkel GitHub Pages-versjon uten avhengigheter.",
+    "basketTitle": "Egg i kurv",
+    "basketIntro": "Hvert egg åpnes på riktig dato. Åpnede egg blir stående som sprukne skall i kurven.",
+    "galleryTitle": "Åpnede bilder",
+    "galleryIntro": "Hver dag legges dagens bilde til i galleriet.",
+    "galleryEmpty": "Ingen egg er klekket enda.",
+    "eggOpenedShort": "Klekket"
   },
   "doors": {
     "maundyThursday": {
       "title": "Skjærtorsdag",
-      "body": "Et rolig øyeblikk. Legg merke til noe lite som kjennes vennlig i dag, og la det få være nok. Du kan bytte denne teksten med hva du vil: dikt, bilde, lydlenke eller en liten oppgave."
+      "body": "Dagens åpning ligger nå i galleriet. Bytt gjerne ut plassholderbildet med ditt eget bilde i mappen bilder og behold samme filnavn hvis du vil slippe kodeendringer."
     },
     "goodFriday": {
       "title": "Langfredag",
-      "body": "I en light-versjon kan hver dør være svært enkel. Én tekst, ett bilde eller én lenke er ofte mer enn nok. Målet er lav friksjon og lett vedlikehold."
+      "body": "Denne løsningen er laget for lav friksjon: ett egg, ett bilde, én tekst. Du kan senere fylle inn mer personlig innhold uten å endre strukturen."
     },
     "holySaturday": {
       "title": "Påskeaften",
-      "body": "Dette er en plassholdertekst. Du kan erstatte innholdet med noe personlig, lekent eller stille. Kalenderen fungerer uten ekstra biblioteker og kan publiseres rett på GitHub Pages."
+      "body": "Når et egg åpnes, blir skallet igjen i kurven og bildet samles separat i galleriet. Det gir siden en tydeligere progresjon dag for dag."
     },
     "easterSunday": {
       "title": "1. påskedag",
-      "body": "Her kan du legge inn en liten hilsen, et sitat, et bilde eller en kort lydfil via lenke. Om du vil, kan vi senere gjøre hver dør mer visuell."
+      "body": "Her kan du legge inn et ferdig kunstbilde, en illustrasjon eller et skannet motiv. Formatet fungerer godt med stående bilder."
     },
     "easterMonday": {
       "title": "2. påskedag",
-      "body": "Siste dør i light-versjonen. Strukturen er laget for å ligne originalprosjektet ditt: egne mapper for bilder, språk, flagg og påminnelser."
+      "body": "Dette er siste egg i light-versjonen. Bytt ut tekst og bilder fritt, men behold gjerne samme struktur så blir GitHub Pages-oppsettet lett å vedlikeholde."
     }
   }
 }

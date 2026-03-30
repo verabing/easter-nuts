@@ -1,36 +1,42 @@
 {
   "ui": {
     "pageTitle": "Easter Calendar",
-    "pageIntro": "Five small doors from Maundy Thursday through Easter Monday.",
+    "pageIntro": "Five small eggs from Maundy Thursday through Easter Monday.",
     "languageLabel": "Language",
     "todayButton": "Today",
     "statusTitle": "Status",
-    "statusText": "{open} of {total} doors are open right now.",
+    "statusText": "{open} of {total} eggs are open.",
     "openDoor": "Open",
     "lockedDoor": "Locked",
     "closeModal": "Close",
-    "footerText": "Built as a simple GitHub Pages version with no dependencies."
+    "footerText": "Built as a simple GitHub Pages version with no dependencies.",
+    "basketTitle": "Egg basket",
+    "basketIntro": "Each egg opens on the right date. Opened eggs remain as cracked shells in the basket.",
+    "galleryTitle": "Opened images",
+    "galleryIntro": "Each day, the new image is added to the gallery.",
+    "galleryEmpty": "No eggs have hatched yet.",
+    "eggOpenedShort": "Hatched"
   },
   "doors": {
     "maundyThursday": {
       "title": "Maundy Thursday",
-      "body": "A quiet moment. Notice one small thing that feels kind today and let that be enough. You can replace this text with anything: a poem, an image, an audio link, or a tiny prompt."
+      "body": "Today's opening now appears in the gallery. You can replace the placeholder image with your own file in the bilder folder and keep the same file name if you want to avoid code changes."
     },
     "goodFriday": {
       "title": "Good Friday",
-      "body": "In a light version, each door can stay very simple. One text, one image, or one link is usually enough. The goal is low friction and easy maintenance."
+      "body": "This version is built for low friction: one egg, one image, one text. You can fill in more personal content later without changing the structure."
     },
     "holySaturday": {
       "title": "Holy Saturday",
-      "body": "This is placeholder text. You can replace it with something personal, playful, or quiet. The calendar works without extra libraries and can be published directly on GitHub Pages."
+      "body": "When an egg is opened, the shell stays in the basket and the image is collected separately in the gallery. That gives the page a clearer sense of daily progression."
     },
     "easterSunday": {
       "title": "Easter Sunday",
-      "body": "Here you can add a short greeting, a quote, an image, or a brief audio file by link. Later we can make each door more visual if you want."
+      "body": "Here you can add a finished artwork, an illustration, or a scanned image. The layout works especially well with portrait-oriented pictures."
     },
     "easterMonday": {
       "title": "Easter Monday",
-      "body": "Final door in the light version. The structure is designed to resemble your original project with separate folders for images, languages, flags, and reminders."
+      "body": "This is the final egg in the light version. Change text and images freely, but keeping the same structure makes the GitHub Pages setup easy to maintain."
     }
   }
 }

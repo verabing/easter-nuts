@@ -1,36 +1,42 @@
 {
   "ui": {
     "pageTitle": "Osterkalender",
-    "pageIntro": "Fünf kleine Türen von Gründonnerstag bis Ostermontag.",
+    "pageIntro": "Fünf kleine Eier von Gründonnerstag bis Ostermontag.",
     "languageLabel": "Sprache",
     "todayButton": "Heute",
     "statusTitle": "Status",
-    "statusText": "{open} von {total} Türen sind gerade geöffnet.",
+    "statusText": "{open} von {total} Eiern sind geöffnet.",
     "openDoor": "Öffnen",
     "lockedDoor": "Gesperrt",
     "closeModal": "Schließen",
-    "footerText": "Als einfache GitHub-Pages-Version ohne Abhängigkeiten gebaut."
+    "footerText": "Als einfache GitHub-Pages-Version ohne Abhängigkeiten gebaut.",
+    "basketTitle": "Eierkorb",
+    "basketIntro": "Jedes Ei öffnet sich am richtigen Datum. Geöffnete Eier bleiben als aufgebrochene Schalen im Korb liegen.",
+    "galleryTitle": "Geöffnete Bilder",
+    "galleryIntro": "Jeden Tag kommt ein neues Bild zur Galerie dazu.",
+    "galleryEmpty": "Noch ist kein Ei geschlüpft.",
+    "eggOpenedShort": "Geschlüpft"
   },
   "doors": {
     "maundyThursday": {
       "title": "Gründonnerstag",
-      "body": "Ein ruhiger Moment. Nimm heute etwas Kleines wahr, das sich freundlich anfühlt, und lass das genügen. Du kannst diesen Text durch alles ersetzen: Gedicht, Bild, Audiolink oder kleinen Impuls."
+      "body": "Die heutige Öffnung erscheint nun in der Galerie. Du kannst das Platzhalterbild später einfach im Ordner bilder durch dein eigenes Motiv ersetzen und denselben Dateinamen behalten."
     },
     "goodFriday": {
       "title": "Karfreitag",
-      "body": "In einer Light-Version kann jede Tür sehr einfach bleiben. Ein Text, ein Bild oder ein Link reicht oft völlig aus. Das Ziel ist wenig Reibung und leichte Pflege."
+      "body": "Diese Version ist auf geringe Reibung ausgelegt: ein Ei, ein Bild, ein Text. Persönlichere Inhalte kannst du später ergänzen, ohne die Struktur umzubauen."
     },
     "holySaturday": {
       "title": "Karsamstag",
-      "body": "Dies ist ein Platzhaltertext. Du kannst ihn durch etwas Persönliches, Spielerisches oder Stilles ersetzen. Der Kalender funktioniert ohne zusätzliche Bibliotheken und lässt sich direkt auf GitHub Pages veröffentlichen."
+      "body": "Wenn ein Ei geöffnet wird, bleibt die Schale im Korb und das Bild sammelt sich separat in der Galerie. Dadurch entsteht von Tag zu Tag eine klarere Entwicklung auf der Seite."
     },
     "easterSunday": {
       "title": "Ostersonntag",
-      "body": "Hier kannst du einen kurzen Gruß, ein Zitat, ein Bild oder eine kleine Audiodatei per Link einfügen. Später können wir jede Tür auf Wunsch visueller machen."
+      "body": "Hier kannst du ein fertiges Bild, eine Illustration oder einen Scan einfügen. Das Layout funktioniert besonders gut mit hochformatigen Motiven."
     },
     "easterMonday": {
       "title": "Ostermontag",
-      "body": "Letzte Tür der Light-Version. Die Struktur ist so angelegt, dass sie deinem Originalprojekt ähnelt: separate Ordner für Bilder, Sprachen, Flaggen und Erinnerungen."
+      "body": "Das ist das letzte Ei der Light-Version. Texte und Bilder kannst du frei austauschen; die bestehende Struktur hält das GitHub-Pages-Setup wartungsarm."
     }
   }
 }

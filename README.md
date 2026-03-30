@@ -69,3 +69,8 @@ Hvis du vil bygge videre fra denne light-versjonen, er de mest naturlige retning
 a) bare bytte tekst og bilder
 b) gjøre dørene mer visuelle med illustrasjoner
 c) legge inn lyd, dikt eller små oppgaver i hver dør
+
+
+## Ny UI-retning
+
+Denne versjonen bruker en kurv med fem mønstrede egg. Når et egg åpnes, blir det liggende som sprukket skall i kurven, og dagens bilde samles separat i galleriet. Standard plassholderbilder ligger i `bilder/egg-1.svg` til `bilder/egg-5.svg` og kan erstattes med egne bilder med samme filnavn.
