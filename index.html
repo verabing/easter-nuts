@@ -75,6 +75,7 @@
       transition: transform .18s ease, filter .18s ease, opacity .18s ease;
       filter: drop-shadow(0 10px 16px rgba(0,0,0,.18));
       user-select: none;
+      transform-origin: center bottom;
     }
 
     .egg img {
@@ -90,10 +91,20 @@
 
     .egg.available {
       cursor: pointer;
+      animation: wiggleHatch 1.15s ease-in-out infinite;
     }
 
     .egg.available:hover {
-      transform: translateY(-10px) scale(1.05);
+      filter: drop-shadow(0 14px 18px rgba(0,0,0,.22));
+    }
+
+    @keyframes wiggleHatch {
+      0%   { transform: rotate(0deg) translateY(0) scale(1); }
+      18%  { transform: rotate(-3deg) translateY(-3px) scale(1.04); }
+      36%  { transform: rotate(3deg) translateY(0) scale(1.07); }
+      54%  { transform: rotate(-2deg) translateY(-4px) scale(1.05); }
+      72%  { transform: rotate(2deg) translateY(0) scale(1.03); }
+      100% { transform: rotate(0deg) translateY(0) scale(1); }
     }
 
     .status {
@@ -204,19 +215,19 @@
     <div class="scene">
       <img src="Bilder/easterkurv.png" class="basket" alt="Easter basket" />
 
-      <div class="egg" id="egg1" data-day="1" style="left: 13%; top: 36%; width: 18%;">
+      <div class="egg" id="egg1" data-day="1" style="left: 12%; top: 34%; width: 20%;">
         <img src="Bilder/egg1.png" alt="Egg 1" />
       </div>
-      <div class="egg" id="egg2" data-day="2" style="left: 27%; top: 25%; width: 22%;">
+      <div class="egg" id="egg2" data-day="2" style="left: 26%; top: 25%; width: 22%;">
         <img src="Bilder/egg2.png" alt="Egg 2" />
       </div>
-      <div class="egg" id="egg3" data-day="3" style="left: 46%; top: 30%; width: 19%;">
+      <div class="egg" id="egg3" data-day="3" style="left: 42%; top: 31%; width: 19%;">
         <img src="Bilder/egg3.png" alt="Egg 3" />
       </div>
-      <div class="egg" id="egg4" data-day="4" style="left: 59%; top: 24%; width: 19%;">
+      <div class="egg" id="egg4" data-day="4" style="left: 53%; top: 24%; width: 19%;">
         <img src="Bilder/egg4.png" alt="Egg 4" />
       </div>
-      <div class="egg" id="egg5" data-day="5" style="left: 72%; top: 34%; width: 17%;">
+      <div class="egg" id="egg5" data-day="5" style="left: 64%; top: 33%; width: 17%;">
         <img src="Bilder/egg5.png" alt="Egg 5" />
       </div>
     </div>
