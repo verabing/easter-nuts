@@ -171,12 +171,22 @@ p.lead{
 </div>
 
 <script>
+<<<<<<< HEAD
 const STORAGE_PREFIX = "easter_2026_";
 const gallery = document.getElementById("gallery");
 const modal = document.getElementById("modal");
 const modalImg = document.getElementById("modalImg");
 const closeBtn = document.getElementById("closeBtn");
 const statusEl = document.getElementById("status");
+=======
+function openEgg(day, el){
+  el.classList.add("opened");
+  const img=document.createElement("img");
+  img.src="Bilder/artwork-"+day+".jpg";
+  document.getElementById("gallery").appendChild(img);
+}
+</script>
+>>>>>>> 16f4c5cbe3512f7c23b31a6e524ccc02ca10fc47
 
 const days = {
   1: { unlock: "2026-04-02", file: "Bilder/artwork-1.jpg" },
