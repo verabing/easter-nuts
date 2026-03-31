@@ -3,11 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Easter Calendar</title>
+  <title>Happy Easter</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&family=Nunito:wght@500;700&display=swap" rel="stylesheet">
   <style>
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
+      font-family: 'Nunito', Arial, sans-serif;
       background: #ffffff;
       color: #222;
       text-align: center;
@@ -20,13 +23,23 @@
     }
 
     h1 {
-      margin: 0 0 12px;
-      font-size: 3rem;
+      margin: 0 0 10px;
+      font-family: 'Baloo 2', Arial, sans-serif;
+      font-size: clamp(3rem, 7vw, 4.6rem);
+      line-height: 0.95;
+      letter-spacing: 0.01em;
+      font-weight: 800;
     }
+
+    h1 .c1 { color: #f48fa3; }
+    h1 .c2 { color: #f2c500; }
+    h1 .c3 { color: #7fd1df; }
+    h1 .c4 { color: #a7c91f; }
+    h1 .c5 { color: #f39b34; }
 
     .lead {
       margin: 0 0 16px;
-      font-size: 1.06rem;
+      font-size: 1.08rem;
       color: #444;
     }
 
@@ -177,7 +190,6 @@
     }
 
     @media (max-width: 760px) {
-      h1 { font-size: 2.3rem; }
       .scene { max-width: 100%; }
       .gallery {
         display: grid;
@@ -193,11 +205,12 @@
 </head>
 <body>
   <div class="wrap">
-    <h1>Easter Calendar</h1>
-    <p class="lead">
-      From left to right, one egg opens each day from 2 April through 6 April.
-      Click the available egg to open the artwork in a large view.
-    </p>
+    <h1>
+      <span class="c1">H</span><span class="c2">a</span><span class="c3">p</span><span class="c4">p</span><span class="c5">y</span>
+      <span class="c2">E</span><span class="c3">a</span><span class="c4">s</span><span class="c1">t</span><span class="c5">e</span><span class="c2">r</span>
+    </h1>
+
+    <p class="lead">Every day you can open an Easter egg.</p>
 
     <div class="simulator">
       <label for="dateSimulator">Test date:</label>
@@ -215,19 +228,19 @@
     <div class="scene">
       <img src="Bilder/easterkurv.png" class="basket" alt="Easter basket" />
 
-      <div class="egg" id="egg1" data-day="1" style="left: 12%; top: 34%; width: 20%;">
+      <div class="egg" id="egg1" data-day="1" style="left: 10%; top: 33%; width: 21%;">
         <img src="Bilder/egg1.png" alt="Egg 1" />
       </div>
-      <div class="egg" id="egg2" data-day="2" style="left: 26%; top: 25%; width: 22%;">
+      <div class="egg" id="egg2" data-day="2" style="left: 22%; top: 24%; width: 22%;">
         <img src="Bilder/egg2.png" alt="Egg 2" />
       </div>
-      <div class="egg" id="egg3" data-day="3" style="left: 42%; top: 31%; width: 19%;">
+      <div class="egg" id="egg3" data-day="3" style="left: 35%; top: 29%; width: 20%;">
         <img src="Bilder/egg3.png" alt="Egg 3" />
       </div>
-      <div class="egg" id="egg4" data-day="4" style="left: 53%; top: 24%; width: 19%;">
+      <div class="egg" id="egg4" data-day="4" style="left: 47%; top: 24%; width: 20%;">
         <img src="Bilder/egg4.png" alt="Egg 4" />
       </div>
-      <div class="egg" id="egg5" data-day="5" style="left: 64%; top: 33%; width: 17%;">
+      <div class="egg" id="egg5" data-day="5" style="left: 58%; top: 31%; width: 18%;">
         <img src="Bilder/egg5.png" alt="Egg 5" />
       </div>
     </div>
@@ -315,9 +328,7 @@
     function rebuildGallery() {
       gallery.innerHTML = "";
       for (let day = 1; day <= 5; day++) {
-        if (isOpened(day)) {
-          addThumb(day);
-        }
+        if (isOpened(day)) addThumb(day);
       }
     }
 
@@ -341,9 +352,7 @@
           };
         }
 
-        if (opened) {
-          openedCount += 1;
-        }
+        if (opened) openedCount += 1;
       }
 
       rebuildGallery();
@@ -355,14 +364,8 @@
       }
     }
 
-    dateSimulator.addEventListener("change", function () {
-      sync();
-    });
-
-    resetOpenedBtn.addEventListener("click", function () {
-      clearOpened();
-      sync();
-    });
+    dateSimulator.addEventListener("change", function () { sync(); });
+    resetOpenedBtn.addEventListener("click", function () { clearOpened(); sync(); });
 
     closeBtn.addEventListener("click", function () {
       closeModal();
