@@ -5,39 +5,258 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Easter Calendar</title>
 <style>
-body{font-family:Arial;background:#f4f1eb;margin:0;text-align:center;}
-.scene{position:relative;max-width:700px;margin:20px auto;}
-.basket{width:100%;}
-.egg{position:absolute;width:12%;cursor:pointer;}
-.egg.opened{display:none;}
-.gallery{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:20px;}
-.gallery img{width:150px;border:3px solid orange;border-radius:10px;}
+body{
+  font-family:Arial, sans-serif;
+  background:#ffffff;
+  margin:0;
+  text-align:center;
+  color:#222;
+}
+.wrap{
+  max-width:1100px;
+  margin:0 auto;
+  padding:20px 16px 44px;
+}
+h1{
+  margin:0 0 18px;
+  font-size:3rem;
+}
+p.lead{
+  margin:0 0 18px;
+  font-size:1.08rem;
+  color:#444;
+}
+.scene{
+  position:relative;
+  max-width:760px;
+  margin:18px auto 24px;
+}
+.basket{
+  width:100%;
+  display:block;
+}
+.egg{
+  position:absolute;
+  cursor:default;
+  transition:transform .18s ease, filter .18s ease, opacity .18s ease;
+  filter:drop-shadow(0 7px 12px rgba(0,0,0,.16));
+  user-select:none;
+}
+.egg img{
+  width:100%;
+  height:auto;
+  display:block;
+}
+.egg.opened{
+  opacity:0;
+  pointer-events:none;
+}
+.egg.available{
+  cursor:pointer;
+}
+.egg.available:hover{
+  transform:translateY(-8px) scale(1.04);
+}
+.gallery{
+  display:flex;
+  gap:18px;
+  justify-content:center;
+  flex-wrap:wrap;
+  margin-top:20px;
+}
+.thumb{
+  width:180px;
+  border:none;
+  border-radius:10px;
+  display:block;
+  box-shadow:0 10px 22px rgba(0,0,0,.16);
+  background:white;
+  cursor:pointer;
+}
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.78);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:24px;
+  z-index:50;
+}
+.modal.show{
+  display:flex;
+}
+.modal-content{
+  position:relative;
+  max-width:min(92vw, 980px);
+  max-height:90vh;
+}
+.modal-content img{
+  max-width:100%;
+  max-height:90vh;
+  display:block;
+  border-radius:10px;
+  box-shadow:0 20px 48px rgba(0,0,0,.35);
+  background:white;
+}
+.close{
+  position:absolute;
+  top:-10px;
+  right:-10px;
+  width:36px;
+  height:36px;
+  border:none;
+  border-radius:999px;
+  background:white;
+  box-shadow:0 6px 16px rgba(0,0,0,.22);
+  cursor:pointer;
+  font-size:22px;
+  line-height:1;
+}
+.status{
+  margin-top:8px;
+  color:#555;
+  font-size:.98rem;
+}
+@media (max-width:760px){
+  h1{font-size:2.3rem;}
+  .scene{max-width:100%;}
+  .gallery{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:14px;
+    max-width:360px;
+    margin:20px auto 0;
+  }
+  .thumb{
+    width:100%;
+  }
+}
 </style>
 </head>
 <body>
+<div class="wrap">
+  <h1>Easter Calendar</h1>
+  <p class="lead">From left to right, one egg opens each day from 2 April through 6 April. Click the available egg to open the artwork in a large view.</p>
 
-<h1>Easter Calendar</h1>
-<p>Click an egg to reveal today's artwork.</p>
+  <div class="scene">
+    <img src="Bilder/easterkurv.png" class="basket" alt="Easter basket">
+    <div class="egg" id="egg1" data-day="1" style="left:14%; top:38%; width:14%;">
+      <img src="Bilder/egg1.png" alt="Egg 1">
+    </div>
+    <div class="egg" id="egg2" data-day="2" style="left:28%; top:30%; width:16%;">
+      <img src="Bilder/egg2.png" alt="Egg 2">
+    </div>
+    <div class="egg" id="egg3" data-day="3" style="left:45%; top:33%; width:15%;">
+      <img src="Bilder/egg3.png" alt="Egg 3">
+    </div>
+    <div class="egg" id="egg4" data-day="4" style="left:60%; top:29%; width:15.5%;">
+      <img src="Bilder/egg4.png" alt="Egg 4">
+    </div>
+    <div class="egg" id="egg5" data-day="5" style="left:73%; top:36%; width:14%;">
+      <img src="Bilder/egg5.png" alt="Egg 5">
+    </div>
+  </div>
 
-<div class="scene">
-<img src="Bilder/easterkurv.png" class="basket">
-<img src="Bilder/egg1.png" class="egg" style="left:20%;top:40%;" onclick="openEgg(1,this)">
-<img src="Bilder/egg2.png" class="egg" style="left:35%;top:35%;" onclick="openEgg(2,this)">
-<img src="Bilder/egg3.png" class="egg" style="left:50%;top:40%;" onclick="openEgg(3,this)">
-<img src="Bilder/egg4.png" class="egg" style="left:65%;top:38%;" onclick="openEgg(4,this)">
-<img src="Bilder/egg5.png" class="egg" style="left:78%;top:50%;" onclick="openEgg(5,this)">
+  <div class="status" id="status">Only eggs up to today's date can be opened.</div>
+
+  <div class="gallery" id="gallery"></div>
 </div>
 
-<div class="gallery" id="gallery"></div>
+<div class="modal" id="modal">
+  <div class="modal-content">
+    <button class="close" id="closeBtn" aria-label="Close">×</button>
+    <img id="modalImg" src="" alt="">
+  </div>
+</div>
 
 <script>
-function openEgg(day, el){
-  el.classList.add("opened");
-  const img=document.createElement("img");
-  img.src="bilder/artwork-"+day+".jpg";
-  document.getElementById("gallery").appendChild(img);
-}
-</script>
+const STORAGE_PREFIX = "easter_2026_";
+const gallery = document.getElementById("gallery");
+const modal = document.getElementById("modal");
+const modalImg = document.getElementById("modalImg");
+const closeBtn = document.getElementById("closeBtn");
+const statusEl = document.getElementById("status");
 
+const days = {
+  1: { unlock: "2026-04-02", file: "Bilder/artwork-1.jpg" },
+  2: { unlock: "2026-04-03", file: "Bilder/artwork-2.jpg" },
+  3: { unlock: "2026-04-04", file: "Bilder/artwork-3.jpg" },
+  4: { unlock: "2026-04-05", file: "Bilder/artwork-4.jpg" },
+  5: { unlock: "2026-04-06", file: "Bilder/artwork-5.jpg" }
+};
+
+function isOpened(day){
+  return localStorage.getItem(STORAGE_PREFIX + day) === "1";
+}
+function markOpened(day){
+  localStorage.setItem(STORAGE_PREFIX + day, "1");
+}
+function canOpen(day){
+  const today = new Date();
+  const unlock = new Date(days[day].unlock + "T00:00:00");
+  return today >= unlock;
+}
+function showModal(src, altText="Artwork"){
+  modalImg.src = src;
+  modalImg.alt = altText;
+  modal.classList.add("show");
+}
+function closeModal(){
+  modal.classList.remove("show");
+}
+function addThumb(day){
+  if (document.getElementById("thumb-" + day)) return;
+  const img = document.createElement("img");
+  img.src = days[day].file;
+  img.alt = "Artwork " + day;
+  img.className = "thumb";
+  img.id = "thumb-" + day;
+  img.addEventListener("click", () => showModal(days[day].file, "Artwork " + day));
+  gallery.appendChild(img);
+}
+function sync(){
+  let openedCount = 0;
+  for (let day = 1; day <= 5; day++) {
+    const egg = document.getElementById("egg" + day);
+    const opened = isOpened(day);
+    const available = canOpen(day) && !opened;
+
+    egg.classList.toggle("opened", opened);
+    egg.classList.toggle("available", available);
+
+    egg.onclick = null;
+    if (available) {
+      egg.onclick = () => {
+        showModal(days[day].file, "Artwork " + day);
+        markOpened(day);
+      };
+    }
+
+    if (opened) {
+      openedCount++;
+      addThumb(day);
+    }
+  }
+  statusEl.textContent = openedCount + " of 5 artworks are already opened.";
+}
+closeBtn.addEventListener("click", () => {
+  closeModal();
+  sync();
+});
+modal.addEventListener("click", (e) => {
+  if (e.target === modal) {
+    closeModal();
+    sync();
+  }
+});
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") {
+    closeModal();
+    sync();
+  }
+});
+window.addEventListener("load", sync);
+</script>
 </body>
 </html>
