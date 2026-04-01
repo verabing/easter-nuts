@@ -4,9 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Happy Easter</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&family=Nunito:wght@500;700&display=swap" rel="stylesheet">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&family=Nunito:wght@500;700&display=swap" rel="stylesheet" />
+
   <style>
     body {
       margin: 0;
@@ -15,13 +17,7 @@
       color: #222;
       text-align: center;
     }
-  
-    
 
-@keyframes float {
-  from { transform: translateY(0); }
-  to { transform: translateY(-40px); }
-}
     .wrap {
       max-width: 1120px;
       margin: 0 auto;
@@ -65,34 +61,6 @@
       color: #444;
     }
 
-    .simulator {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      margin: 0 0 18px;
-      padding: 10px 14px;
-      border: 1px solid #d9d9d9;
-      border-radius: 999px;
-      background: #fafafa;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-
-    .simulator label {
-      font-size: 0.95rem;
-      color: #444;
-    }
-
-    .simulator select,
-    .simulator button {
-      font: inherit;
-      padding: 7px 10px;
-      border-radius: 8px;
-      border: 1px solid #cfcfcf;
-      background: white;
-      cursor: pointer;
-    }
-
     .scene {
       position: relative;
       max-width: 780px;
@@ -107,8 +75,8 @@
     .egg {
       position: absolute;
       cursor: default;
-      transition: transform .18s ease, filter .18s ease, opacity .18s ease;
-      filter: drop-shadow(0 10px 16px rgba(0,0,0,.18));
+      transition: transform 0.18s ease, filter 0.18s ease, opacity 0.18s ease;
+      filter: drop-shadow(0 10px 16px rgba(0, 0, 0, 0.18));
       user-select: none;
       transform-origin: center bottom;
     }
@@ -130,7 +98,7 @@
     }
 
     .egg.available:hover {
-      filter: drop-shadow(0 14px 18px rgba(0,0,0,.22));
+      filter: drop-shadow(0 14px 18px rgba(0, 0, 0, 0.22));
     }
 
     @keyframes wiggleHatch {
@@ -145,7 +113,7 @@
     .status {
       margin-top: 6px;
       color: #555;
-      font-size: .98rem;
+      font-size: 0.98rem;
     }
 
     .gallery {
@@ -161,7 +129,7 @@
       border: none;
       border-radius: 10px;
       display: block;
-      box-shadow: 0 10px 22px rgba(0,0,0,.16);
+      box-shadow: 0 10px 22px rgba(0, 0, 0, 0.16);
       background: white;
       cursor: pointer;
     }
@@ -169,7 +137,7 @@
     .modal {
       position: fixed;
       inset: 0;
-      background: rgba(0,0,0,.78);
+      background: rgba(0, 0, 0, 0.78);
       display: none;
       align-items: center;
       justify-content: center;
@@ -202,7 +170,7 @@
       max-height: 90vh;
       display: block;
       border-radius: 10px;
-      box-shadow: 0 20px 48px rgba(0,0,0,.35);
+      box-shadow: 0 20px 48px rgba(0, 0, 0, 0.35);
       background: white;
     }
 
@@ -214,7 +182,7 @@
       border: none;
       border-radius: 999px;
       background: white;
-      box-shadow: 0 6px 16px rgba(0,0,0,.22);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.22);
       cursor: pointer;
       font-size: 22px;
       line-height: 1;
@@ -241,7 +209,10 @@
     }
 
     @media (max-width: 760px) {
-      .scene { max-width: 100%; }
+      .scene {
+        max-width: 100%;
+      }
+
       .gallery {
         display: grid;
         grid-template-columns: 1fr;
@@ -249,8 +220,11 @@
         max-width: 360px;
         margin: 20px auto 0;
       }
-      .thumb { width: 100%; }
-      .simulator { border-radius: 16px; }
+
+      .thumb {
+        width: 100%;
+      }
+
       .nav-prev { left: -4px; }
       .nav-next { right: -4px; }
     }
@@ -265,40 +239,31 @@
 
     <p class="lead">Every day you can open an Easter egg.</p>
 
-    <div class="simulator">
-      <label for="dateSimulator">Test date:</label>
-      <select id="dateSimulator">
-        <option value="">Use real date</option>
-        <option value="2026-04-02">02.04.2026</option>
-        <option value="2026-04-03">03.04.2026</option>
-        <option value="2026-04-04">04.04.2026</option>
-        <option value="2026-04-05">05.04.2026</option>
-        <option value="2026-04-06">06.04.2026</option>
-      </select>
-      <button type="button" id="resetOpened">Reset opened eggs</button>
-    </div>
-
     <div class="scene">
       <img src="Bilder/easterkurv.png" class="basket" alt="Easter basket" />
 
       <div class="egg" id="egg1" data-day="1" style="left: 10%; top: 33%; width: 21%;">
         <img src="Bilder/egg1.png" alt="Egg 1" />
       </div>
+
       <div class="egg" id="egg2" data-day="2" style="left: 22%; top: 24%; width: 22%;">
         <img src="Bilder/egg2.png" alt="Egg 2" />
       </div>
+
       <div class="egg" id="egg3" data-day="3" style="left: 35%; top: 29%; width: 20%;">
         <img src="Bilder/egg3.png" alt="Egg 3" />
       </div>
+
       <div class="egg" id="egg4" data-day="4" style="left: 47%; top: 24%; width: 20%;">
         <img src="Bilder/egg4.png" alt="Egg 4" />
       </div>
+
       <div class="egg" id="egg5" data-day="5" style="left: 58%; top: 31%; width: 18%;">
         <img src="Bilder/egg5.png" alt="Egg 5" />
       </div>
     </div>
 
-    <div class="status" id="status">Only eggs up to today's date can be opened.</div>
+    <div class="status" id="status">0 of 5 artworks are already opened.</div>
     <div class="gallery" id="gallery"></div>
   </div>
 
@@ -306,15 +271,18 @@
     <div class="modal-content">
       <button class="close" id="closeBtn" aria-label="Close">&times;</button>
       <button class="nav-btn nav-prev hidden" id="prevBtn" aria-label="Previous image">&#8249;</button>
+
       <div class="modal-stage">
         <img id="modalImg" src="" alt="" />
       </div>
+
       <button class="nav-btn nav-next hidden" id="nextBtn" aria-label="Next image">&#8250;</button>
     </div>
   </div>
 
   <script>
     const STORAGE_PREFIX = "easter_2026_";
+
     const gallery = document.getElementById("gallery");
     const modal = document.getElementById("modal");
     const modalImg = document.getElementById("modalImg");
@@ -322,8 +290,6 @@
     const prevBtn = document.getElementById("prevBtn");
     const nextBtn = document.getElementById("nextBtn");
     const statusEl = document.getElementById("status");
-    const dateSimulator = document.getElementById("dateSimulator");
-    const resetOpenedBtn = document.getElementById("resetOpened");
     const pageTitle = document.getElementById("pageTitle");
 
     const days = {
@@ -341,6 +307,7 @@
       pageTitle.classList.remove("animate");
       void pageTitle.offsetWidth;
       pageTitle.classList.add("animate");
+
       setTimeout(() => {
         pageTitle.classList.remove("animate");
       }, 2600);
@@ -354,16 +321,7 @@
       localStorage.setItem(STORAGE_PREFIX + day, "1");
     }
 
-    function clearOpened() {
-      for (let day = 1; day <= 5; day++) {
-        localStorage.removeItem(STORAGE_PREFIX + day);
-      }
-    }
-
     function getCurrentDate() {
-      if (dateSimulator.value) {
-        return new Date(dateSimulator.value + "T12:00:00");
-      }
       return new Date();
     }
 
@@ -374,8 +332,9 @@
     }
 
     function updateModalNav() {
-      prevBtn.classList.toggle("hidden", currentImages.length <= 1);
-      nextBtn.classList.toggle("hidden", currentImages.length <= 1);
+      const multiple = currentImages.length > 1;
+      prevBtn.classList.toggle("hidden", !multiple);
+      nextBtn.classList.toggle("hidden", !multiple);
     }
 
     function renderModalImage() {
@@ -384,9 +343,9 @@
       updateModalNav();
     }
 
-    function showModal(images, startIndex) {
+    function showModal(images, startIndex = 0) {
       currentImages = images.slice();
-      currentImageIndex = startIndex || 0;
+      currentImageIndex = startIndex;
       renderModalImage();
       modal.classList.add("show");
     }
@@ -415,22 +374,26 @@
       img.alt = "Artwork " + day;
       img.className = "thumb";
       img.id = "thumb-" + day;
+
       img.addEventListener("click", function () {
         showModal(days[day].images, 0);
       });
+
       gallery.appendChild(img);
     }
 
     function rebuildGallery() {
       gallery.innerHTML = "";
+
       for (let day = 1; day <= 5; day++) {
-        if (isOpened(day)) addThumb(day);
+        if (isOpened(day)) {
+          addThumb(day);
+        }
       }
     }
 
     function sync() {
       let openedCount = 0;
-      const simulated = dateSimulator.value;
 
       for (let day = 1; day <= 5; day++) {
         const egg = document.getElementById("egg" + day);
@@ -441,6 +404,7 @@
         egg.classList.toggle("available", available);
 
         egg.onclick = null;
+
         if (available) {
           egg.onclick = function () {
             showModal(days[day].images, 0);
@@ -448,20 +412,14 @@
           };
         }
 
-        if (opened) openedCount += 1;
+        if (opened) {
+          openedCount += 1;
+        }
       }
 
       rebuildGallery();
-
-      if (simulated) {
-        statusEl.textContent = openedCount + " of 5 artworks are already opened. Preview date: " + simulated.split("-").reverse().join(".");
-      } else {
-        statusEl.textContent = openedCount + " of 5 artworks are already opened.";
-      }
+      statusEl.textContent = openedCount + " of 5 artworks are already opened.";
     }
-
-    dateSimulator.addEventListener("change", function () { sync(); });
-    resetOpenedBtn.addEventListener("click", function () { clearOpened(); sync(); });
 
     closeBtn.addEventListener("click", function () {
       closeModal();
